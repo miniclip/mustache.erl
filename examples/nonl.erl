@@ -1,5 +1,9 @@
 -module(nonl).
--compile(export_all).
+
+-export([name/0]).
+-export([value/0]).
+-export([taxed_value/0]).
+-export([in_ca/0]).
 
 name() ->
   "Tom".

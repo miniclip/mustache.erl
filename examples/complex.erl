@@ -1,5 +1,11 @@
 -module(complex).
--compile(export_all).
+
+-export([header/0]).
+-export([item/0]).
+-export([link/1]).
+-export([list/0]).
+-export([empty/0]).
+-export([start/0]).
 
 header() ->
   "Colors".

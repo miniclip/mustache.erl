@@ -27,6 +27,16 @@
 -author("Tom Preston-Werner").
 -export([compile/1, compile/2, render/1, render/2, render/3, get/2, get/3, escape/1, start/1]).
 
+-ignore_xref([compile/1]).
+-ignore_xref([compile/2]).
+-ignore_xref([escape/1]).
+-ignore_xref([get/2]).
+-ignore_xref([get/3]).
+-ignore_xref([render/1]).
+-ignore_xref([render/2]).
+-ignore_xref([render/3]).
+-ignore_xref([start/1]).
+
 -record(mstate, {mod = undefined,
                  section_re = undefined,
                  tag_re = undefined}).

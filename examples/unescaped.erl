@@ -1,5 +1,7 @@
 -module(unescaped).
--compile(export_all).
+
+-export([title/0]).
+-export([start/0]).
 
 title() ->
   "Bear > Shark".
