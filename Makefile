@@ -1,18 +1,45 @@
-ERL ?= erl
-EBIN_DEPS_DIRS := $(wildcard deps/*/ebin)
+SHELL := bash
+.ONESHELL:
+.SHELLFLAGS := -euc
+.DELETE_ON_ERROR:
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
 
-all: deps compile
+all:
+.PHONY: all
+
+clean:
+	rebar3 clean -a
+.PHONY: clean
 
 compile:
-	@./rebar compile
+	rebar3 compile
+.PHONY: compile
 
-test:
-	@./rebar eunit skip_deps=true
+check: xref dialyzer
+.NOTPARALLEL: check
+.PHONY: check
 
-deps:
-	@./rebar get-deps
+xref:
+	rebar3 xref
+.PHONY: xref
 
-run:
-	@$(ERL) -pa ebin/ -pa $(EBIN_DEPS_DIRS)
+dialyzer:
+	rebar3 dialyzer
+.PHONY: dialyzer
 
+test: eunit cover
+.NOTPARALLEL: check
 .PHONY: test
+
+eunit:
+	rebar3 eunit
+.PHONY: eunit
+
+cover:
+	rebar3 cover
+.PHONY: cover
+
+shell:
+	rebar3 shell
+.PHONY: shell
