@@ -1,7 +1,7 @@
 mustache.erl
 ====
 
-[![](https://travis-ci.com/MiniclipPortugal/mustache.erl.png?branch=master)](http://travis-ci.org/MiniclipPortugal/mustache.erl)
+[![](https://travis-ci.com/MiniclipPortugal/mustache.erl.png?branch=master)](https://travis-ci.com/MiniclipPortugal/mustache.erl)
 [![Erlang][erlang badge]][erlang downloads]
 
 [erlang badge]: https://img.shields.io/badge/erlang-%3E%3D19.3-lightgrey
