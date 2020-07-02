@@ -1,11 +1,14 @@
-Mustache for Erlang [![](https://travis-ci.com/MiniclipPortugal/mustache.erl.png?branch=master)](http://travis-ci.org/MiniclipPortugal/mustache.erl)
+mustache.erl
+====
+
+[![](https://travis-ci.com/MiniclipPortugal/mustache.erl.png?branch=master)](http://travis-ci.org/MiniclipPortugal/mustache.erl)
 [![Erlang][erlang badge]][erlang downloads]
 
 [erlang badge]: https://img.shields.io/badge/erlang-%3E%3D19.3-lightgrey
 [erlang downloads]: http://www.erlang.org/download
-===================
 
-An Erlang port of [Mustache for Ruby][1]. Mustache is a framework-agnostic
+This is Mustache for Erlang, an Erlang port of [Mustache for Ruby][1].
+Mustache is a framework-agnostic
 templating system that enforces separation of view logic from the template
 file. Indeed, it is not even possible to embed logic in the template. This
 allows templates to be reused across language boundaries and for other
