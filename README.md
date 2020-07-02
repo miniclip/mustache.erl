@@ -270,7 +270,7 @@ Comments begin with a bang and are ignored. The following template:
 Will render as follows:
 
 ```html
-    <h1>Today.</h1>
+<h1>Today.</h1>
 ```
 
 [1]: http://github.com/defunkt/mustache.git
