@@ -14,10 +14,10 @@ run() ->
   T0 = erlang:monotonic_time(),
   render(CT, Ctx1, ?COUNT),
   T1 = erlang:monotonic_time(),
-  Diff = erlang:convert_time_unit(T1 - T0, native, micro_seconds),
+  Diff = erlang:convert_time_unit(T1 - T0, native, microsecond),
   Mean = Diff / ?COUNT,
   io:format("Total time: ~.2fs~n", [Diff / erlang:convert_time_unit(1, millisecond, native)]),
-  io:format("Mean render time: ~.2fms~n", [Mean / erlang:convert_time_unit(1, micro_seconds, native)]).
+  io:format("Mean render time: ~.2fms~n", [Mean / erlang:convert_time_unit(1, microsecond, native)]).
 
 render(_CT, _Ctx, 0) ->
   ok;
