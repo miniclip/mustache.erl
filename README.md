@@ -54,7 +54,7 @@ make shell
 
 This should produce something like:
 
-```plain
+```text
 Total time: 2.01s
 Mean render time: 4.02ms
 ok
@@ -112,7 +112,7 @@ only booleans.
 
 The template file (simple.mustache) looks like so:
 
-```plain
+```text
 Hello {{name}}
 You have just won ${{value}}!
 {{#in_ca}}
@@ -133,7 +133,7 @@ This tells Mustache to use the `simple` view and to look for a template named
 `simple.mustache` in the same directory as the `simple.beam` bytecode file. If
 all goes well, it returns the rendered HTML:
 
-```plain
+```text
 Hello Tom
 You have just won $10000!
 Well, $6000.00, after taxes.
@@ -173,7 +173,7 @@ different data by constructing a context and passing it to `render`:
 
 This will produce the following output:
 
-```erlang
+```text
 Hello Chris
 You have just won $10000!
 Well, $6000.00, after taxes.
