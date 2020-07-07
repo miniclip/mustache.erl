@@ -33,9 +33,10 @@
 -export([ module/1, module/2 ]).
 -export([ get/2 ]).
 
--ifdef(EUNIT).
--compile(export_all).
--endif.
+-ignore_xref([merge/2]).
+-ignore_xref([module/1]).
+-ignore_xref([new/0]).
+-ignore_xref([to_list/1]).
 
 %% ===================================================================
 %% Create new context
