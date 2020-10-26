@@ -9,6 +9,6 @@ title() ->
 %%---------------------------------------------------------------------------
 
 start() ->
-  code:add_patha(".."),
+  _ = code:add_patha(".."),
   Output = mustache:render(unescaped, "unescaped.mustache"),
   io:format(Output, []).

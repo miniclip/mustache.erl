@@ -12,7 +12,7 @@ run() ->
   % Ctx1 = dict:new(),
   CT = mustache:compile(complex, "examples/complex.mustache"),
   T0 = erlang:monotonic_time(),
-  render(CT, Ctx1, ?COUNT),
+  render(CT, dict:to_list(Ctx1), ?COUNT),
   T1 = erlang:monotonic_time(),
   Diff = erlang:convert_time_unit(T1 - T0, native, microsecond),
   Mean = Diff / ?COUNT,

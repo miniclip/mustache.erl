@@ -9,10 +9,10 @@ name() ->
   "Tom".
 
 value() ->
-  "10000".
+  10000.
 
 taxed_value() ->
-  integer_to_list(value() - (value() * 0.4)).
+  float_to_list(value() - (value() * 0.4), [{decimals, 2}]).
 
 in_ca() ->
   true.
