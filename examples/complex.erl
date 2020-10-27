@@ -28,6 +28,6 @@ empty() ->
 %%---------------------------------------------------------------------------
 
 start() ->
-  code:add_patha(".."),
+  _ = code:add_patha(".."),
   Output = mustache:render(complex, "complex.mustache"),
   io:format(Output, []).
