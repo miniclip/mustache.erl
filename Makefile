@@ -44,11 +44,11 @@ test: eunit cover
 .PHONY: test
 
 eunit:
-	rebar3 eunit
+	@rebar3 eunit
 .PHONY: eunit
 
 cover:
-	rebar3 cover
+	@rebar3 cover
 .PHONY: cover
 
 edoc:

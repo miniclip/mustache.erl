@@ -97,8 +97,8 @@ get_from_module(Key, Ctx) ->
     FunList = case module(Ctx) of
         {error, _} -> [];
         {ok, Module} -> [
-                fun() -> Module:Key(Ctx) end,
-                fun() -> Module:Key() end
+                fun() -> apply(Module, Key, [Ctx]) end,
+                fun() -> apply(Module, Key, []) end
             ]
     end,
     get_from_module(FunList).
