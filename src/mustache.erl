@@ -43,7 +43,6 @@
                  section_re = undefined,
                  tag_re = undefined}).
 
--define(MUSTACHE_CTX, mustache_ctx).
 -define(MUSTACHE_CTX_STR, "mustache_ctx").
 -define(MUSTACHE_STR, "mustache").
 
@@ -92,8 +91,8 @@ render(Mod, File, Ctx) when is_list(File) ->
   CompiledTemplate = compile(Mod, File),
   render(Mod, CompiledTemplate, Ctx);
 render(Mod, CompiledTemplate, CtxData) ->
-  Ctx0 = ?MUSTACHE_CTX:new(CtxData),
-  Ctx1 = ?MUSTACHE_CTX:module(Mod, Ctx0),
+  Ctx0 = mustache_ctx:new(CtxData),
+  Ctx1 = mustache_ctx:module(Mod, Ctx0),
   lists:flatten(CompiledTemplate(Ctx1)).
 
 pre_compile(T, State) ->
@@ -202,12 +201,12 @@ template_path(Mod) ->
   filename:join(DirPath, Basename ++ ".mustache").
 
 get(Key, Ctx, Mod) ->
-  get(Key, ?MUSTACHE_CTX:module(Mod, Ctx)).
+  get(Key, mustache_ctx:module(Mod, Ctx)).
 
 get(Key, Ctx) when is_list(Key) ->
   get(list_to_atom(Key), Ctx);
 get(Key, Ctx) ->
-  case ?MUSTACHE_CTX:get(Key, Ctx) of
+  case mustache_ctx:get(Key, Ctx) of
     {ok, Value} -> to_s(Value);
     {error, _} -> []
   end.
