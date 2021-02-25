@@ -1,6 +1,5 @@
-*.beam
-*.dump
-ebin
-.eunit
-deps/
-_build/
+.rebar3
+_build
+erl_crash.dump
+log
+rebar3.crashdump
