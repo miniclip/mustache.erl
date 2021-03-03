@@ -1,11 +1,7 @@
-mustache.erl
-====
+# mustache.erl [![GitHub Actions CI][ci-img]][ci]
 
-![build](https://github.com/miniclip/mustache.erl/workflows/build/badge.svg)
-[![Erlang][erlang badge]][erlang downloads]
-
-[erlang badge]: https://img.shields.io/badge/erlang-%3E%3D19.3-lightgrey
-[erlang downloads]: http://www.erlang.org/download
+[ci]: https://github.com/miniclip/mustache.erl
+[ci-img]: https://github.com/miniclip/mustache.erl/workflows/build/badge.svg
 
 This is Mustache for Erlang, an Erlang port of [Mustache for Ruby][1].
 Mustache is a framework-agnostic
@@ -30,8 +26,7 @@ testing. The API may change at any time. It still lacks some of the features
 of Mustache for Ruby and the performance (even with compiled templates) is not
 yet where I'd like it to be.
 
-Installation
-------------
+## Installation
 
 To compile the code, navigate to the mustache.erl project root and issue:
 
@@ -39,8 +34,7 @@ To compile the code, navigate to the mustache.erl project root and issue:
 make compile
 ```
 
-Benchmark
----------
+## Benchmark
 
 To ease benchmarking of the code we've created the following steps:
 
@@ -60,8 +54,7 @@ Mean render time: 4.02ms
 ok
 ```
 
-The Simplest Example
---------------------
+## The Simplest Example
 
 The simplest example involves using a string template and a context from the
 REPL.
@@ -78,8 +71,7 @@ In line 1 we created a context that contains a value bound to the `planet`
 tag. In line 2 we rendered a string template by passing in the template and the
 context.
 
-Two-File Example
-----------------
+## Two-File Example
 
 A more complex example consists of two files: the view and the template. The
 view (logic) file is an Erlang module (simple.erl):
@@ -139,8 +131,7 @@ You have just won $10000!
 Well, $6000.00, after taxes.
 ```
 
-Compiled Templates (for speed)
-------------------------------
+## Compiled Templates (for speed)
 
 In order to boost performance for templates that will be called many times in
 the lifetime of a runtime, Mustache allows you to compile a template and then
@@ -155,8 +146,7 @@ the template on each call).
 Now, each call to render will use the compiled template (TFun) instead of
 compiling the template on its own.
 
-The Power of Context
---------------------
+## The Power of Context
 
 You will often want to provide additional data to your template and view. You
 can do this by passing in an initial context to the render function. During
@@ -205,8 +195,7 @@ name(Ctx) ->
 If the requested key does not exist in the context, the empty list `[]` will
 be returned.
 
-Tag Types
----------
+## Tag Types
 
 Tags are indicated by the double mustaches. `{{name}}` is a tag. Let's talk
 about the different types of tags.

@@ -27,6 +27,8 @@
 -author("Tom Preston-Werner").
 -export([compile/1, compile/2, render/1, render/2, render/3, get/2, get/3, escape/1, start/1]).
 
+-elvis([{elvis_style, no_debug_call, disable}]).
+
 -ignore_xref([compile/1]).
 -ignore_xref([compile/2]).
 -ignore_xref([escape/1]).
@@ -41,7 +43,6 @@
                  section_re = undefined,
                  tag_re = undefined}).
 
--define(MUSTACHE_CTX, mustache_ctx).
 -define(MUSTACHE_CTX_STR, "mustache_ctx").
 -define(MUSTACHE_STR, "mustache").
 
@@ -63,7 +64,7 @@ compile(Mod, File) ->
   code:purge(Mod),
   {module, _} = code:load_file(Mod),
   {ok, TemplateBin} = file:read_file(File),
-  Template = re:replace(TemplateBin, "\"", "\\\\\"", [global, {return,list}]),
+  Template = re:replace(TemplateBin, "\"", "\\\\\"", [global, {return, list}]),
   State = #mstate{mod = Mod},
   CompiledTemplate = pre_compile(Template, State),
   % io:format("~p~n~n", [CompiledTemplate]),
@@ -90,8 +91,8 @@ render(Mod, File, Ctx) when is_list(File) ->
   CompiledTemplate = compile(Mod, File),
   render(Mod, CompiledTemplate, Ctx);
 render(Mod, CompiledTemplate, CtxData) ->
-  Ctx0 = ?MUSTACHE_CTX:new(CtxData),
-  Ctx1 = ?MUSTACHE_CTX:module(Mod, Ctx0),
+  Ctx0 = mustache_ctx:new(CtxData),
+  Ctx1 = mustache_ctx:module(Mod, Ctx0),
   lists:flatten(CompiledTemplate(Ctx1)).
 
 pre_compile(T, State) ->
@@ -127,7 +128,8 @@ compile_section("#", Name, Content, State) ->
       "\"true\" -> " ++ Result ++ "; " ++
       "\"false\" -> []; " ++
       "List when is_list(List) -> " ++
-        "[fun(Ctx) -> " ++ Result ++ " end(" ++ ?MUSTACHE_CTX_STR ++ ":merge(SubCtx, Ctx)) || SubCtx <- List]; " ++
+        "[fun(Ctx) -> " ++ Result ++ " end(" ++ ?MUSTACHE_CTX_STR
+            ++ ":merge(SubCtx, Ctx)) || SubCtx <- List]; " ++
       "Else -> " ++
         "throw({template, io_lib:format(\"Bad context for ~p: ~p\", [" ++ Name ++ ", Else])}) " ++
     "end " ++
@@ -175,7 +177,8 @@ compile_tag("!", _Content, _State) ->
 
 compile_escaped_tag(Content, State) ->
   Mod = State#mstate.mod,
-  ?MUSTACHE_STR ++ ":escape(" ++ ?MUSTACHE_STR ++ ":get(" ++ Content ++ ", Ctx, " ++ atom_to_list(Mod) ++ "))".
+  ?MUSTACHE_STR ++ ":escape(" ++ ?MUSTACHE_STR ++ ":get(" ++ Content ++ ", Ctx, "
+    ++ atom_to_list(Mod) ++ "))".
 
 compile_unescaped_tag(Content, State) ->
   Mod = State#mstate.mod,
@@ -198,12 +201,12 @@ template_path(Mod) ->
   filename:join(DirPath, Basename ++ ".mustache").
 
 get(Key, Ctx, Mod) ->
-  get(Key, ?MUSTACHE_CTX:module(Mod, Ctx)).
+  get(Key, mustache_ctx:module(Mod, Ctx)).
 
 get(Key, Ctx) when is_list(Key) ->
   get(list_to_atom(Key), Ctx);
 get(Key, Ctx) ->
-  case ?MUSTACHE_CTX:get(Key, Ctx) of
+  case mustache_ctx:get(Key, Ctx) of
     {ok, Value} -> to_s(Value);
     {error, _} -> []
   end.

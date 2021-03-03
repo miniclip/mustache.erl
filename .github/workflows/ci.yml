@@ -19,5 +19,4 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
-      - run: make check
-      - run: make test
+      - run: make version

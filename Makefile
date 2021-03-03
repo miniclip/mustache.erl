@@ -5,41 +5,52 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-all:
-.PHONY: all
+version: upgrade clean compile check test edoc
+.PHONY: version
+
+upgrade: upgrade-rebar3_lint
+	@rebar3 do unlock,upgrade
+.PHONY: upgrade
+
+upgrade-rebar3_lint:
+	@rebar3 plugins upgrade rebar3_lint
+.PHONY: upgrade-rebar3_lint
 
 clean:
-	rebar3 clean -a
+	@rebar3 clean -a
 .PHONY: clean
 
 compile:
-	rebar3 compile
+	@rebar3 compile
 .PHONY: compile
 
-check: xref dialyzer
-.NOTPARALLEL: check
+check: xref dialyzer elvis-rock
 .PHONY: check
 
 xref:
-	rebar3 xref
+	@rebar3 as test xref
 .PHONY: xref
 
 dialyzer:
-	rebar3 dialyzer
+	@rebar3 as test dialyzer
 .PHONY: dialyzer
 
+elvis-rock:
+	@rebar3 lint
+.PHONY: elvis-rock
+
 test: eunit cover
-.NOTPARALLEL: check
+.NOTPARALLEL: test
 .PHONY: test
 
 eunit:
-	rebar3 eunit
+	@rebar3 eunit
 .PHONY: eunit
 
 cover:
-	rebar3 cover
+	@rebar3 cover
 .PHONY: cover
 
-shell:
-	rebar3 shell
-.PHONY: shell
+edoc:
+	@rebar3 edoc
+.PHONY: edoc
