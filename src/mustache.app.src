@@ -2,6 +2,9 @@
     {description, "Mustache Templates Rendering Library"},
     {vsn, git},
     {registered, []},
+    {pkg_name, mc_mustache},
+    {licenses, ["The MIT License"]},
+    {links, [{"GitHub", "https://github.com/miniclip/mustache.erl"}]},
 
     {applications, [
         % OTP dependencies
